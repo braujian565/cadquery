@@ -1,15 +1,15 @@
 FROM mambaorg/micromamba:latest
 
-COPY --chown=$MAMBA_USER:$MAMBA_USER environment.yml /opt/environment.yml
-COPY --chown=$MAMBA_USER:$MAMBA_USER ./images/install_gl.sh /opt/install_gl.sh
-COPY --chown=$MAMBA_USER:$MAMBA_USER ./images/install_env.sh /opt/install_env.sh
-COPY --chown=$MAMBA_USER:$MAMBA_USER ./ /opt/cq
+COPY --chown=$MAMBA_USER:$MAMBA_USER environment.yml /tmp/environment.yml
+COPY --chown=$MAMBA_USER:$MAMBA_USER ./images/install_gl.sh /tmp/install_gl.sh
+COPY --chown=$MAMBA_USER:$MAMBA_USER ./images/install_env.sh /tmp/install_env.sh
+COPY --chown=$MAMBA_USER:$MAMBA_USER ./ /tmp/cq
 
 USER root
-RUN source /opt/install_gl.sh
+RUN source /tmp/install_gl.sh
 
 USER $MAMBA_USER
-RUN export MYDIR=/opt && source /opt/install_env.sh
+RUN export MYDIR=/tmp && source /tmp/install_env.sh
 
 ARG MAMBA_DOCKERFILE_ACTIVATE=1  # (otherwise python will not be found)
 
