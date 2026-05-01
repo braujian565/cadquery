@@ -11,16 +11,24 @@ Want a quick glimpse of what CadQuery can do?  This quickstart will demonstrate 
 Prerequisites: CadQuery installation
 ====================================
 
-If you want to quickly try out CadQuery you can do so by running apptainer or docker.
+If you want to quickly try out CadQuery you can do so by running apptainer,
 
-```
-apptainer run oras://ghcr.io/cadquery/cadquery-apptainer:master ipython -i your_script.py
-```
+.. code-block::
+
+   apptainer run oras://ghcr.io/cadquery/cadquery-apptainer:master ipython -i your_script.py
+
+
+or docker/podman. Note that on Windows this will require using WSL.
+
+.. code-block::
+
+   podman run -it -v /tmp:/tmp -e DISPLAY=$DISPLAY -v $(pwd):/data ghcr.io/cadquery/cadquery-docker:master ipython  -i /data/your_script.py
+
 
 Otherwise, follow the :ref:`installation`, to install CadQuery.
 
 
-You can use any editor of your choice to edit CadQuer (i.e. Python) scripts.
+You can use any editor of your choice to edit CadQuery (i.e. Python) scripts.
 You'll see that we start out with the script for a simple block.
 
 What we'll accomplish
