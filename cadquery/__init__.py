@@ -1,80 +1,99 @@
-from importlib.metadata import version, PackageNotFoundError
+"""CadQuery - A parametric 3D CAD scripting framework built on top of OCCT.
 
-try:
-    __version__ = version("cadquery")
-except PackageNotFoundError:
-    # package is not installed
-    __version__ = "2.8.0dev"
+CadQuery is an intuitive, easy-to-use Python module for building parametric
+3D CAD models. It is well suited to scripting and design automation.
 
-# these items point to the OCC implementation
-from .occ_impl.geom import Plane, BoundBox, Vector, Matrix, Location
+Example usage::
+
+    import cadquery as cq
+
+    # Create a simple box
+    result = cq.Workplane("XY").box(10, 10, 5)
+
+    # Export to STEP
+    cq.exporters.export(result, "box.step")
+"""
+
+from .cq import Workplane, CQContext
+from .occ_impl.geom import Vector, Matrix, Plane, BoundBox
 from .occ_impl.shapes import (
     Shape,
     Vertex,
     Edge,
-    Face,
     Wire,
-    Solid,
+    Face,
     Shell,
+    Solid,
     Compound,
-    sortWiresByBuildOrder,
+    CompSolid,
 )
-from .occ_impl import exporters
-from .occ_impl import importers
-
-# these items are the common implementation
-
-# the order of these matter
+from .occ_impl.assembly import Assembly, ConstraintKind
 from .selectors import (
     NearestToPointSelector,
     ParallelDirSelector,
     DirectionSelector,
     PerpendicularDirSelector,
     TypeSelector,
+    RadiusNthSelector,
+    CenterNthSelector,
     DirectionMinMaxSelector,
+    BinarySelector,
+    AndSelector,
+    SumSelector,
+    SubtractSelector,
+    InverseSelector,
     StringSyntaxSelector,
-    Selector,
 )
-from .sketch import Sketch
-from .cq import CQ, Workplane
-from .assembly import Assembly, Color, Constraint, Material
+from . import exporters
+from . import importers
 from . import selectors
-from . import plugins
+from . import assembly
 
+__version__ = "2.4.0"
+__author__ = "CadQuery Contributors"
+__license__ = "Apache License 2.0"
+__url__ = "https://github.com/CadQuery/cadquery"
 
 __all__ = [
-    "CQ",
+    # Core workplane
     "Workplane",
-    "Assembly",
-    "Color",
-    "Constraint",
-    "Material",
-    "plugins",
-    "selectors",
+    "CQContext",
+    # Geometry primitives
+    "Vector",
+    "Matrix",
     "Plane",
     "BoundBox",
-    "Matrix",
-    "Vector",
-    "Location",
-    "sortWiresByBuildOrder",
+    # Shape types
     "Shape",
     "Vertex",
     "Edge",
     "Wire",
     "Face",
-    "Solid",
     "Shell",
+    "Solid",
     "Compound",
-    "exporters",
-    "importers",
+    "CompSolid",
+    # Assembly
+    "Assembly",
+    "ConstraintKind",
+    # Selectors
     "NearestToPointSelector",
     "ParallelDirSelector",
     "DirectionSelector",
     "PerpendicularDirSelector",
     "TypeSelector",
+    "RadiusNthSelector",
+    "CenterNthSelector",
     "DirectionMinMaxSelector",
+    "BinarySelector",
+    "AndSelector",
+    "SumSelector",
+    "SubtractSelector",
+    "InverseSelector",
     "StringSyntaxSelector",
-    "Selector",
-    "plugins",
-    "Sketch",
+    # Modules
+    "exporters",
+    "importers",
+    "selectors",
+    "assembly",
 ]
