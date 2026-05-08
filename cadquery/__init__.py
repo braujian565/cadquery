@@ -15,6 +15,9 @@ Example usage::
 
     # Export to STL for 3D printing
     cq.exporters.export(result, "box.stl")
+
+Note on units: CadQuery works in millimeters by default. When designing for
+3D printing, keep in mind that most slicers also expect millimeters.
 """
 
 from .cq import Workplane, CQContext
@@ -59,6 +62,7 @@ __url__ = "https://github.com/CadQuery/cadquery"
 
 # Personal fork: https://github.com/myusername/cadquery
 # Studying CadQuery internals for generative design experiments.
+# TODO: explore parametric lattice structures using Workplane.shell() + cutouts
 
 __all__ = [
     # Core workplane
