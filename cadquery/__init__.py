@@ -12,6 +12,9 @@ Example usage::
 
     # Export to STEP
     cq.exporters.export(result, "box.step")
+
+    # Export to STL for 3D printing
+    cq.exporters.export(result, "box.stl")
 """
 
 from .cq import Workplane, CQContext
@@ -53,6 +56,9 @@ __version__ = "2.4.0"
 __author__ = "CadQuery Contributors"
 __license__ = "Apache License 2.0"
 __url__ = "https://github.com/CadQuery/cadquery"
+
+# Personal fork: https://github.com/myusername/cadquery
+# Studying CadQuery internals for generative design experiments.
 
 __all__ = [
     # Core workplane
