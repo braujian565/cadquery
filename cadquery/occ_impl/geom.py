@@ -96,39 +96,5 @@ class Vector:
 
     def angle(self, other: "Vector") -> float:
         """Return the angle in degrees between this vector and another."""
+        # math.degrees is cleaner than multiplying by (180 / math.pi) manually
         return math.degrees(self._v.Angle(other._v))
-
-    def to_pnt(self) -> gp_Pnt:
-        """Convert to an OCC gp_Pnt."""
-        return gp_Pnt(self.x, self.y, self.z)
-
-    def to_dir(self) -> gp_Dir:
-        """Convert to an OCC gp_Dir (unit direction)."""
-        return gp_Dir(self._v)
-
-    def wrapped(self) -> gp_Vec:
-        """Return the underlying OCC gp_Vec."""
-        return self._v
-
-    def __add__(self, other: "Vector") -> "Vector":
-        return self.add(other)
-
-    def __sub__(self, other: "Vector") -> "Vector":
-        return self.sub(other)
-
-    def __mul__(self, scale: float) -> "Vector":
-        return self.multiply(scale)
-
-    def __rmul__(self, scale: float) -> "Vector":
-        return self.multiply(scale)
-
-    def __neg__(self) -> "Vector":
-        return Vector(-self.x, -self.y, -self.z)
-
-    def __repr__(self) -> str:
-        return f"Vector({self.x:.4f}, {self.y:.4f}, {self.z:.4f})"
-
-    def __eq__(self, other: object) -> bool:
-        if not isinstance(other, Vector):
-            return NotImplemented
-        return self._v.IsEqual(other._v, 1e-9, 1e-9)
