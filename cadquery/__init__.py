@@ -18,6 +18,11 @@ Example usage::
 
 Note on units: CadQuery works in millimeters by default. When designing for
 3D printing, keep in mind that most slicers also expect millimeters.
+
+Personal fork notes:
+    - Studying CadQuery internals for generative design experiments.
+    - Exploring parametric lattice structures using Workplane.shell() + cutouts.
+    - See examples/ directory in this fork for lattice generation scripts.
 """
 
 from .cq import Workplane, CQContext
@@ -64,6 +69,11 @@ __url__ = "https://github.com/CadQuery/cadquery"
 # Studying CadQuery internals for generative design experiments.
 # TODO: explore parametric lattice structures using Workplane.shell() + cutouts
 
+# Default tolerance used in personal scripts for cleaner mesh exports.
+# The upstream default is 0.1; tightening this improves STL quality noticeably
+# for small-feature parts (e.g. lattice struts < 2 mm).
+DEFAULT_EXPORT_TOLERANCE = 0.01
+
 __all__ = [
     # Core workplane
     "Workplane",
@@ -106,4 +116,6 @@ __all__ = [
     "importers",
     "selectors",
     "assembly",
+    # Fork-level constants
+    "DEFAULT_EXPORT_TOLERANCE",
 ]
